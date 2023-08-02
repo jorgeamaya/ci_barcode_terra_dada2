@@ -213,13 +213,14 @@ def main():
 		path_to_meta = os.path.join(res_dir, "PrimerRem", "primrem_meta.tsv")
 
 		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2")
-		cmd = ['cp', os.path.join(res_dir, 'DADA2', 'seqtab.tsv'), 
-			os.path.join(res_dir, '.'), 
-			'\\', 
-			'cp', os.path.join(res_dir, 'DADA2', 'ASVBimeras.txt'),
-                        os.path.join(res_dir, '.')
-			]
 
+		cmd = ['cp', os.path.join(res_dir, 'DADA2', 'seqtab.tsv'), os.path.join(res_dir, 'seqtab.tsv')] 
+		print(cmd)
+		proccp = subprocess.Popen(cmd, stdout=sys.stdout, stderr=sys.stderr)
+		proccp.wait()
+
+		cmd = ['cp', os.path.join(res_dir, 'DADA2', 'ASVBimeras.txt'), os.path.join(res_dir, 'ASVBimeras.txt')]
+		print(cmd)
 		proccp = subprocess.Popen(cmd, stdout=sys.stdout, stderr=sys.stderr)
 		proccp.wait()
                 
