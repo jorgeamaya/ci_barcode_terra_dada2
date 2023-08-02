@@ -21,7 +21,7 @@ workflow amplicon_decontamination_detect {
 		String saveRdata = ""
 		Int justConcatenate = 0
 		Int maxMismatch = 0
-		File path_to_DADA2
+		String path_to_DADA2
 	}
 	call ampseq_bbmerge_process {
 		input:
@@ -82,7 +82,7 @@ task ampseq_bbmerge_process {
 		String saveRdata = ""
 		Int justConcatenate = 0
 		Int maxMismatch = 0
-		File path_to_DADA2
+		File path_to_DADA2 = Code
 	}
 
 	Map[String, String] in_map = {
