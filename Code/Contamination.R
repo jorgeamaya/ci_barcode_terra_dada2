@@ -7,9 +7,9 @@ path_to_flist = args[3]
 joined_threshold = as.numeric(args[4])
 contamination_threshold = as.numeric(args[5])
 
-#data_dir = "/Users/jorgeamaya/Desktop/ci_barcode_terra/Report/Merge/" 
-#out_dir = "/Users/jorgeamaya/Desktop/ci_barcode_terra/Report/"
-#path_to_flist = "/Users/jorgeamaya/Desktop/ci_barcode_terra/Data/barcodes_matches.csv"
+#data_dir = "/Users/jorgeamaya/Desktop/ci_barcode_terra_dada2/Report/DADA2_Contamination/" 
+#out_dir = "/Users/jorgeamaya/Desktop/ci_barcode_terra_dada2/Report/"
+#path_to_flist = "/Users/jorgeamaya/Desktop/ci_barcode_terra_dada2/Data/barcodes_matches.csv"
 #joined_threshold = 1000
 #contamination_threshold = 0.5
 

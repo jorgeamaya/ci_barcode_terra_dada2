@@ -8,7 +8,6 @@ workflow amplicon_decontamination_detect {
 		String pattern_rv = "*_L001_R2_001.fastq.gz"
 		Int joined_threshold = 1000
 		Float contamination_threshold = 0.5
-		File barcodes_file
 		File pr1 
 		File pr2 
 		String Class = "parasite"
@@ -32,7 +31,6 @@ workflow amplicon_decontamination_detect {
 			pattern_rv = pattern_rv,
 			joined_threshold = joined_threshold,
 			contamination_threshold = contamination_threshold,
-			barcodes_file = barcodes_file,
 			pr1 = pr1,
 			pr2 = pr2,
 			Class = Class,
@@ -71,7 +69,6 @@ task ampseq_bbmerge_process {
 		String pattern_rv = "*_L001_R2_001.fastq.gz"
 		Int joined_threshold = 1000
 		Float contamination_threshold = 0.5
-		File barcodes_file
 		File pr1 
 		File pr2
 		String Class = "parasite"
@@ -95,7 +92,6 @@ task ampseq_bbmerge_process {
 		"pattern_rv": pattern_rv,
 		"joined_threshold": joined_threshold,
 		"contamination_threshold": contamination_threshold,
-		"barcodes_file": barcodes_file,
 		"pr1": pr1,
 		"pr2": pr2,
 		"Class": Class,

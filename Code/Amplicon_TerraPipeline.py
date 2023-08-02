@@ -79,7 +79,6 @@ def main():
 		if 'merge_minlength' in config_inputs.keys(): merge_minlength = config_inputs['merge_minlength']
 		if 'pr1' in config_inputs.keys(): pr1 = config_inputs['pr1']
 		if 'pr2' in config_inputs.keys(): pr2 = config_inputs['pr2']
-		if 'barcodes_file' in config_inputs.keys(): barcodes_file = config_inputs['barcodes_file']
 		if 'Class' in config_inputs.keys(): Class = config_inputs['Class']
 		if 'maxEE' in config_inputs.keys(): maxEE = config_inputs['maxEE']
 		if 'trimRight' in config_inputs.keys():	trimRight = config_inputs['trimRight']
@@ -394,7 +393,7 @@ def main():
 			path_to_seqtab = os.path.join(res_dir, 'seqtab.tsv')
 
 		path_to_fasta = os.path.join(res_dir, "PostProc_DADA2", "ASVSeqs.fasta") #Fasta file of ASV sequences from DADA2 pipeline"
-		path_to_table = os.path.join(res_dir, "PostProc_DADA2", "ASVTable_mod.txt") #ASV table from DADA2 pipeline
+		path_to_table = os.path.join(res_dir, "PostProc_DADA2", "ASVTable.txt") #ASV table from DADA2 pipeline
 		path_to_out = os.path.join(res_dir, "CIGARVariants_Bfilter.out.tsv") #Output seqtab tsv file with amplicon/variant counts
 		path_asv_to_cigar = os.path.join(res_dir, "ASV_to_CIGAR", "ASV_to_CIGAR.out.txt") #Output file for ASV -> CIGAR string table 
 		path_to_amp_db = reference #Amplicon sequence fasta file

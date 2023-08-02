@@ -24,10 +24,6 @@ if (!require("stringdist")) {
   install.packages("stringdist", repos="http://cran.rstudio.com/")
   library("stringdist")
 }
-if (!require("viridis")) {
-  install.packages("viridis", repos="http://cran.rstudio.com/")
-  library("viridis")
-}
 
 # Custom filtering, denoising parameters (if not default) can be provided as a separate config file?
 parser <- ArgumentParser()
@@ -429,8 +425,8 @@ sink()
 track_plot = as.data.frame(track[, c("merged", "merged_discarded", "filtered_discarded", "adaptor_discarded", "original_discarded")])
 
 #Subset the table to the desired experiments
-#samples_order = read.csv(file.path(dirname(dirname(work_dir)), "Data", "experiments10c.csv"), sep = ",", header = FALSE)$V1
-#track_plot = track_plot[row.names(track_plot) %in% samples_order,] 
+samples_order = read.csv(file.path(dirname(dirname(work_dir)), "Data", "experiments10c.csv"), sep = ",", header = FALSE)$V1
+track_plot = track_plot[row.names(track_plot) %in% samples_order,] 
 
 track_plot <- track_plot[order(-track_plot[,1], 
                                -track_plot[,2], 
