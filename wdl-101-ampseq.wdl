@@ -111,6 +111,7 @@ task ampseq_bbmerge_process {
 	command <<<
 	set -euxo pipefail
 	#set -x
+	R --version
 	Rscript -e "library("dada2")"
 	#mkdir fq_dir
 	
