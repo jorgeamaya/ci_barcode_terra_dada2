@@ -120,6 +120,16 @@ task ampseq_bbmerge_process {
 
 	echo "ENTERING RESULTS PRINT"
 	ls Results/PrimerRem
+
+	cat Results/PrimerRem/SP011228689710c_S165_stderr.txt
+	cat Results/PrimerRem/SP011228689710c_S165_stdout.txt
+	cat Results/PrimerRem/SP011228690410c_S173_stderr.txt
+	cat Results/PrimerRem/SP011228690410c_S173_stdout.txt
+	cat Results/PrimerRem/SP011228692110c_S126_stderr.txt
+	cat Results/PrimerRem/SP011228692110c_S126_stdout.txt
+
+	cat Results/PrimerRem/S*_stdout.txt
+
 	ls Results/DADA2_Contamination
 	Rscript /Code/Contamination.R Report/DADA2_Contamination/ Report/ ~{path_to_flist} ~{joined_threshold} ~{contamination_threshold}
 	find . -type f
