@@ -116,8 +116,10 @@ task ampseq_bbmerge_process {
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
-	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --merge --bbmerge_report
+	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2_contamination
 
+	ls Results/PrimerRem
+	ls Results/DADA2_Contamination
 	Rscript /Code/Contamination.R Report/DADA2_Contamination/ Report/ ~{path_to_flist} ~{joined_threshold} ~{contamination_threshold}
 	find . -type f
 	>>>
