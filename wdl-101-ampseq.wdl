@@ -112,7 +112,7 @@ task ampseq_bbmerge_process {
 	set -euxo pipefail
 	#set -x
 	mkdir fq_dir
-
+	
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
@@ -131,8 +131,8 @@ task ampseq_bbmerge_process {
 	cat Results/PrimerRem/S*_stdout.txt
 
 	ls Results/DADA2_Contamination
-
-
+	R --version
+	
 	echo "ENTERING DADA2 RESULTS PRINT"
 	cat Results/DADA2_Contamination/stdout.txt
 	cat Results/DADA2_Contamination/stderr.txt
