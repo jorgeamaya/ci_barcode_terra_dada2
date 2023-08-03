@@ -118,7 +118,7 @@ task ampseq_bbmerge_process {
 
 	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2_contamination
 
-	echo "ENTERING RESULTS PRINT"
+	echo "ENTERING PRIMERREM RESULTS PRINT"
 	ls Results/PrimerRem
 
 	cat Results/PrimerRem/SP011228689710c_S165_stderr.txt
@@ -131,6 +131,12 @@ task ampseq_bbmerge_process {
 	cat Results/PrimerRem/S*_stdout.txt
 
 	ls Results/DADA2_Contamination
+
+
+	echo "ENTERING DADA2 RESULTS PRINT"
+	cat Results/DADA2_Contamination/stdout.txt
+	cat Results/DADA2_Contamination/stderr.txt
+
 	Rscript /Code/Contamination.R Report/DADA2_Contamination/ Report/ ~{path_to_flist} ~{joined_threshold} ~{contamination_threshold}
 	find . -type f
 	>>>
