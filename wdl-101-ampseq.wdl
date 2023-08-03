@@ -118,6 +118,7 @@ task ampseq_bbmerge_process {
 
 	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2_contamination
 
+	echo "ENTERING RESULTS PRINT"
 	ls Results/PrimerRem
 	ls Results/DADA2_Contamination
 	Rscript /Code/Contamination.R Report/DADA2_Contamination/ Report/ ~{path_to_flist} ~{joined_threshold} ~{contamination_threshold}
