@@ -111,36 +111,33 @@ task ampseq_bbmerge_process {
 	command <<<
 	set -euxo pipefail
 	#set -x
-	R --version
-	Rscript -e "library("dada2")"
-	#mkdir fq_dir
+	mkdir fq_dir
 	
-	#gsutil ls ~{path_to_fq}
-	#gsutil -m cp -r ~{path_to_fq}* fq_dir/
+	gsutil ls ~{path_to_fq}
+	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
-	#python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2_contamination
+	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2_contamination
 
-	#echo "ENTERING PRIMERREM RESULTS PRINT"
-	#ls Results/PrimerRem
+	echo "ENTERING PRIMERREM RESULTS PRINT"
+	ls Results/PrimerRem
 
-	#cat Results/PrimerRem/SP011228689710c_S165_stderr.txt
-	#cat Results/PrimerRem/SP011228689710c_S165_stdout.txt
-	#cat Results/PrimerRem/SP011228690410c_S173_stderr.txt
-	#cat Results/PrimerRem/SP011228690410c_S173_stdout.txt
-	#cat Results/PrimerRem/SP011228692110c_S126_stderr.txt
-	#cat Results/PrimerRem/SP011228692110c_S126_stdout.txt
+	cat Results/PrimerRem/SP011228689710c_S165_stderr.txt
+	cat Results/PrimerRem/SP011228689710c_S165_stdout.txt
+	cat Results/PrimerRem/SP011228690410c_S173_stderr.txt
+	cat Results/PrimerRem/SP011228690410c_S173_stdout.txt
+	cat Results/PrimerRem/SP011228692110c_S126_stderr.txt
+	cat Results/PrimerRem/SP011228692110c_S126_stdout.txt
 
-	#cat Results/PrimerRem/S*_stdout.txt
+	cat Results/PrimerRem/S*_stdout.txt
 
-	#ls Results/DADA2_Contamination
-	#R --version
+	ls Results/DADA2_Contamination
 	
-	#echo "ENTERING DADA2 RESULTS PRINT"
-	#cat Results/DADA2_Contamination/stdout.txt
-	#cat Results/DADA2_Contamination/stderr.txt
+	echo "ENTERING DADA2 RESULTS PRINT"
+	cat Results/DADA2_Contamination/stdout.txt
+	cat Results/DADA2_Contamination/stderr.txt
 
-	#Rscript /Code/Contamination.R Report/DADA2_Contamination/ Report/ ~{path_to_flist} ~{joined_threshold} ~{contamination_threshold}
-	#find . -type f
+	Rscript /Code/Contamination.R Report/DADA2_Contamination/ Report/ ~{path_to_flist} ~{joined_threshold} ~{contamination_threshold}
+	find . -type f
 	>>>
 	output {
 		File rawfilelist = "Results/Fq_metadata/rawfilelist.tsv"
