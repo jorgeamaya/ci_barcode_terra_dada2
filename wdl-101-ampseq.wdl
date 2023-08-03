@@ -111,6 +111,7 @@ task ampseq_bbmerge_process {
 	command <<<
 	set -euxo pipefail
 	#set -x
+	conda install -y -c bioconda bioconductor-dada2
 	mkdir fq_dir
 	
 	gsutil ls ~{path_to_fq}
