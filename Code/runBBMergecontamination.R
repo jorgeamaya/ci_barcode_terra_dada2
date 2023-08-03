@@ -32,7 +32,7 @@ write(paste0("Processing file: ", fastq_file), stderr())
 #             BARCODE REPORT           #
 ########################################
 
-source(file.path("Code", "matching_functions.R"))
+source(file.path("/Code", "matching_functions.R"))
 #source(paste0(file.path(dirname(dirname(work_dir)), "Code", "matching_functions.R")))
 barcodes = read.csv(path_to_flist, sep = ",", header = TRUE)
 dist = 2
