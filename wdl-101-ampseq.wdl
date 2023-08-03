@@ -112,6 +112,8 @@ task ampseq_bbmerge_process {
 	set -euxo pipefail
 	#set -x
 	mkdir fq_dir
+	R --version
+	Rscript "library("dada2")"
 	
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
