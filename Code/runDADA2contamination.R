@@ -4,10 +4,6 @@
 # LOAD LIBRARIES AND PREPARE VARIABLES #
 ########################################
 
-if (!require("BiocManager", quietly = TRUE))
-  install.packages("BiocManager")
-BiocManager::install("dada2")
-
 if (!require("dada2")) {
   install.packages("dada2", repos="http://cran.rstudio.com/")
   library("dada2")
