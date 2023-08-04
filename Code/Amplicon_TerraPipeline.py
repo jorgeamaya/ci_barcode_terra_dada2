@@ -211,7 +211,7 @@ def main():
 
 		path_to_meta = os.path.join(res_dir, "PrimerRem", "primrem_meta.tsv")
 
-		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2")
+		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, path_to_flist, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2")
 
 		cmd = ['cp', os.path.join(res_dir, 'DADA2', 'seqtab.tsv'), os.path.join(res_dir, 'seqtab.tsv')] 
 		print(cmd)
@@ -230,7 +230,7 @@ def main():
 
 		path_to_meta = os.path.join(res_dir, "AdaptorRem", "adaptorrem_meta.tsv")
 		
-		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2_Contamination")
+		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, path_to_flist, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2_Contamination")
 
 	#Remove primers from iseq data and perform DADA2 preprocess	
 	if args.dada2 and args.mixed_reads:
@@ -276,7 +276,7 @@ def main():
 		ad.flush_dir(res_dir, "DADA2_OP", "QProfile")
 		path_to_meta = os.path.join(res_dir, "PrimerRem", "mixed_op_prim_meta.tsv")
 		justConcatenate=0	
-		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch,saveRdata, res_dir, "DADA2_OP")
+		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, path_to_flist, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch,saveRdata, res_dir, "DADA2_OP")
 		seqtab_op = os.path.join(res_dir,'DADA2_OP','seqtab.tsv')
 		bimera_op = os.path.join(res_dir,'DADA2_OP','ASVBimeras.txt')
 
@@ -284,7 +284,7 @@ def main():
 		ad.flush_dir(res_dir, "DADA2_NOP", "QProfile")
 		path_to_meta = os.path.join(res_dir, "PrimerRem", "mixed_nop_prim_meta.tsv")
 		justConcatenate=1	
-		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch,saveRdata, res_dir, "DADA2_NOP")
+		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, path_to_flist, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch,saveRdata, res_dir, "DADA2_NOP")
 		seqtab_nop = os.path.join(res_dir,'DADA2_NOP','seqtab.tsv')
 		bimera_nop = os.path.join(res_dir,'DADA2_NOP','ASVBimeras.txt')
 
@@ -340,14 +340,14 @@ def main():
 		justConcatenate=1	
 		ad.flush_dir(res_dir, "DADA2_NOP_Contamination")
 		path_to_meta = os.path.join(res_dir, "PrimerRem_NOP", "mixed_nop_prim_meta.tsv")			
-		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2_NOP_Contamination")
+		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, path_to_flist, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2_NOP_Contamination")
 
 		seqtab_op = os.path.join(res_dir,'DADA2_NOP_Contamination','seqtab.tsv')
 
 		justConcatenate=0	
 		ad.flush_dir(res_dir, "DADA2_OP_Contamination")
 		path_to_meta = os.path.join(res_dir, "PrimerRem_OP", "mixed_op_prim_meta.tsv")			
-		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2_OP_Contamination")
+		ad.run_dada2(path_to_DADA2, path_to_meta, path_to_fq, path_to_flist, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, "DADA2_OP_Contamination")
 
 		seqtab_nop = os.path.join(res_dir,'DADA2_OP_Contamination','seqtab.tsv')
 

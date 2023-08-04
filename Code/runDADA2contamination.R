@@ -47,6 +47,7 @@ parser$add_argument("-wA", "--omega_a", type="double", help="P-value threshold i
 parser$add_argument("-jC", "--justConcatenate", type="integer", help="Specify whether ASVs need to be concatenated with Ns instead of merging")
 parser$add_argument("-mM", "--maxMismatch", type="integer", help="Specify the maximum number of mismatches allowed during merging")
 parser$add_argument("--bimera", action='store_true', help="Optionally output list of sequences identified as bimeras")
+parser$add_argument("-b", "--barcodes", help="The path to a csv file with the sample_id,Forward,Reverse, where Forward and Reverse are columns with the barcodes for the sample")
 args <- parser$parse_args()
 
 #work_dir = '/Users/jorgeamaya/Desktop/Broad_Test/amplicon_decontamination_pipeline/Results/DADA2_Contamination/'
@@ -73,6 +74,7 @@ path_to_data_repo = args$path_to_data_repo
 work_dir <- args$dir
 output_filename = args$output_filename
 save_run = args$save_run
+path_to_flist <- args$barcodes
 
 # obtain/initialize Parameters
 # (Universal) Parameters
@@ -279,7 +281,7 @@ mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE, justConcat
 ########################################
 
 source(file.path("/Code", "matching_functions.R"))
-barcodes = read.csv(file.path(dirname(dirname(work_dir)), "Data", 'barcodes_matches.csv'), sep = ",", header = TRUE)
+barcodes = read.csv(path_to_flist, sep = ",", header = TRUE)
 dist = 2
 
 for(sample in sample.names){

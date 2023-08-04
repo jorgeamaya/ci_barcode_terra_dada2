@@ -311,7 +311,7 @@ def trim_primer(sampleid, fileF, fileR, res_dir, subdir, pr1, pr2, prefix, keep_
 	return()
 
 #RUN DADA2 SECTION
-def run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, subdir):
+def run_dada2(path_to_DADA2, path_to_meta, path_to_fq, path_to_flist, Class, maxEE, trimRight, minLen, truncQ, matchIDs, max_consist, omegaA, justConcatenate, maxMismatch, saveRdata, res_dir, subdir):
 	"""
 	Runs the DADA2 pipeline on the input files using the specified parameters.
 
@@ -319,6 +319,7 @@ def run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, 
 	- path_to_DADA2 (str): the path to the DADA2 installation directory.
 	- path_to_meta (str): the path to the metadata file containing sample information.
 	- path_to_fq (str): the path to the raw fastq.gz files.
+	- path_to_flist (str): the path to a csv file with the sample_id,Forward,Reverse, where Forward and Reverse are columns with the barcodes for the sample
 	- res_dir (str): the path to the directory where results will be saved.
 	- subdir (str): the name of the subdirectory where the output files will be saved.
 	- Class (str): the name of the column in the metadata file that contains the sample class information.
@@ -365,6 +366,7 @@ def run_dada2(path_to_DADA2, path_to_meta, path_to_fq, Class, maxEE, trimRight, 
 		'-jC', f'{justConcatenate}',
 		'-mM', f'{maxMismatch}',
 		'-s', f'{saveRdata}',
+		'-b', f'{path_to_flist}',
 		f'{bimera}']
 		print(cmd)
 		proc = subprocess.Popen(cmd, stdout=sys.stdout, stderr=sys.stderr)
