@@ -156,7 +156,7 @@ task ampseq_bbmerge_process {
 	}
 	runtime {
 		cpu: 1
-		memory: "1 GiB"
+		memory: "10 GiB"
 		disks: "local-disk 10 HDD"
 		bootDiskSizeGb: 10
 		preemptible: 3
