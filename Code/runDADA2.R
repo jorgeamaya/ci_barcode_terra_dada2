@@ -10,17 +10,17 @@ if (!require("dada2")) {
 }
 
 if (!require("limma")) {
-  install.packages("dada2", repos="http://cran.rstudio.com/")
+  install.packages("limma", repos="http://cran.rstudio.com/")
   library("limma")
 }
 
 if (!require("data.table")) {
-  install.packages("dada2", repos="http://cran.rstudio.com/")
+  install.packages("data.table", repos="http://cran.rstudio.com/")
   library("data.table")
 }
 
 if (!require("argparse")) {
-  install.packages("dada2", repos="http://cran.rstudio.com/")
+  install.packages("argparse", repos="http://cran.rstudio.com/")
   library("argparse")
 }
 
@@ -32,7 +32,7 @@ if (!require("viridis")) {
 qprofile <- function(fastq, work_dir) {
   # Plot Quality profiles before filtering
   fastq_name = sub("\\.fq\\.gz$", "", basename(fastq))
-  pdf(paste0(work_dir,"/QProfile/", fastq_name, ".pdf"))
+  svg(paste0(work_dir,"/QProfile/", fastq_name, ".svg"))
   try(print(plotQualityProfile(fastq)), silent = TRUE)
   dev.off()
 }
@@ -55,6 +55,7 @@ parser$add_argument("-wA", "--omega_a", type="double", help="P-value threshold i
 parser$add_argument("-jC", "--justConcatenate", type="integer", help="Specify whether ASVs need to be concatenated with Ns instead of merging")
 parser$add_argument("-mM", "--maxMismatch", type="integer", help="Specify the maximum number of mismatches allowed during merging")
 parser$add_argument("--bimera", action='store_true', help="Optionally output list of sequences identified as bimeras")
+parser$add_argument("-b", "--barcodes", help="The path to a csv file with the sample_id,Forward,Reverse, where Forward and Reverse are columns with the barcodes for the sample")
 args <- parser$parse_args()
 
 #work_dir = '/Users/jorgeamaya/Desktop/Broad_Test/amplicon_decontamination_pipeline/Results/DADA2'
@@ -275,10 +276,10 @@ print("starting error model learning for reverse reads...")
 errR <- learnErrors(filtRs, multithread=TRUE, verbose=2, randomize=randomize, MAX_CONSIST=max_consist)
 
 #Plot the Errors
-pdf(paste0(work_dir,"/errF.pdf"))
+svg(paste0(work_dir,"/errF.svg"))
 try(print(plotErrors(errF, nominalQ=TRUE)), silent = TRUE)
 dev.off()
-pdf(paste0(work_dir,"/errR.pdf"))
+svg(paste0(work_dir,"/errR.svg"))
 try(print(plotErrors(errR, nominalQ=TRUE)), silent = TRUE)
 dev.off()
 
@@ -424,7 +425,7 @@ track_plot_per <- track_plot_per[order(-track_plot_per[,1],
 
 color_vector = viridis(nrow(t(as.matrix(track_plot))), option = "D")
 
-pdf(paste0(work_dir,"/stacked_barplot.pdf"), width = 12)
+svg(paste0(work_dir,"/stacked_barplot.svg"), width = 12)
 par(mar = c(14, 4, 6, 2), xpd = TRUE) # increase the bottom margin
 barplot(
   t(as.matrix(track_plot)),
@@ -453,7 +454,7 @@ legend(
 
 dev.off()
 
-pdf(paste0(work_dir,"/stacked_barplot_per.pdf"), width = 12)
+svg(paste0(work_dir,"/stacked_barplot_per.svg"), width = 12)
 par(mar = c(14, 4, 6, 2), xpd = TRUE) # increase the bottom margin
 barplot(
   t(as.matrix(track_plot_per)),
@@ -483,7 +484,7 @@ legend(
 dev.off()
 
 #Show the barplot of length distribution
-pdf(paste0(work_dir,"/sequences_barplot.pdf"))
+svg(paste0(work_dir,"/sequences_barplot.svg"))
 print(barplot(table(nchar(getSequences(seqtab)))))
 dev.off()
 
