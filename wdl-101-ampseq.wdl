@@ -23,7 +23,7 @@ workflow amplicon_decontamination_detect {
 		Int maxMismatch = 0
 		String path_to_DADA2 = '/Code'
 	}
-	call ampseq_bbmerge_process {
+	call ampseq_dada2merge_process {
 		input:
 			path_to_fq = path_to_fq,
 			path_to_flist = path_to_flist,
@@ -48,20 +48,20 @@ workflow amplicon_decontamination_detect {
 	}
 
 	output {
-		File rawfilelist_f = ampseq_bbmerge_process.rawfilelist
-		File missing_files_f = ampseq_bbmerge_process.missing_files
-		File Barcode_report_abs_f = ampseq_bbmerge_process.Barcode_report_abs
-		File Barcode_report_per_f = ampseq_bbmerge_process.Barcode_report_per
-		File Insert_size_f = ampseq_bbmerge_process.Insert_size
-		File Match_report_abs_f = ampseq_bbmerge_process.Match_report_abs
-		File Match_report_per_f = ampseq_bbmerge_process.Match_report_per
-		File barcodes_report_dada2_f = ampseq_bbmerge_process.barcodes_report_dada2
-		File hamming_distances_forward_f = ampseq_bbmerge_process.hamming_distances_forward
-		File hamming_distances_reverse_f = ampseq_bbmerge_process.hamming_distances_reverse
+		File rawfilelist_f = ampseq_dada2merge_process.rawfilelist
+		File missing_files_f = ampseq_dada2merge_process.missing_files
+		File Barcode_report_abs_f = ampseq_dada2merge_process.Barcode_report_abs
+		File Barcode_report_per_f = ampseq_dada2merge_process.Barcode_report_per
+		File Insert_size_f = ampseq_dada2merge_process.Insert_size
+		File Match_report_abs_f = ampseq_dada2merge_process.Match_report_abs
+		File Match_report_per_f = ampseq_dada2merge_process.Match_report_per
+		File barcodes_report_dada2_f = ampseq_dada2merge_process.barcodes_report_dada2
+		File hamming_distances_forward_f = ampseq_dada2merge_process.hamming_distances_forward
+		File hamming_distances_reverse_f = ampseq_dada2merge_process.hamming_distances_reverse
 	}
 }
 
-task ampseq_bbmerge_process {
+task ampseq_dada2merge_process {
 	input {
 		String path_to_fq 
 		File path_to_flist
@@ -112,31 +112,11 @@ task ampseq_bbmerge_process {
 	set -euxo pipefail
 	#set -x
 	mkdir fq_dir
-	R --version
-	R -e "library("dada2")"
 	
 	gsutil ls ~{path_to_fq}
 	gsutil -m cp -r ~{path_to_fq}* fq_dir/
 
 	python /Code/Amplicon_TerraPipeline.py --config ~{config_json} --overlap_reads --meta --repo --adaptor_removal --primer_removal --dada2_contamination
-
-	echo "ENTERING PRIMERREM RESULTS PRINT"
-	ls Results/PrimerRem
-
-	cat Results/PrimerRem/SP011228689710c_S165_stderr.txt
-	cat Results/PrimerRem/SP011228689710c_S165_stdout.txt
-	cat Results/PrimerRem/SP011228690410c_S173_stderr.txt
-	cat Results/PrimerRem/SP011228690410c_S173_stdout.txt
-	cat Results/PrimerRem/SP011228692110c_S126_stderr.txt
-	cat Results/PrimerRem/SP011228692110c_S126_stdout.txt
-
-	cat Results/PrimerRem/S*_stdout.txt
-
-	ls Results/DADA2_Contamination
-	
-	echo "ENTERING DADA2 RESULTS PRINT"
-	cat Results/DADA2_Contamination/stdout.txt
-	cat Results/DADA2_Contamination/stderr.txt
 
 	Rscript /Code/Contamination.R Report/DADA2_Contamination/ Report/ ~{path_to_flist} ~{joined_threshold} ~{contamination_threshold}
 	find . -type f
