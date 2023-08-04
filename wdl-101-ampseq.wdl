@@ -57,7 +57,11 @@ workflow amplicon_decontamination_detect {
 		File Match_report_per_f = ampseq_dada2merge_process.Match_report_per
 		File barcodes_report_dada2_f = ampseq_dada2merge_process.barcodes_report_dada2
 		File hamming_distances_forward_f = ampseq_dada2merge_process.hamming_distances_forward
-		File hamming_distances_reverse_f = ampseq_dada2merge_process.hamming_distances_reverse
+		File hamming_distances_reverse_f = ampseq_dada2merge_process.hamming_distances_reverse	
+		File seqtab_f = ampseq_dada2merge_process.seqtab
+		File sequences_barplot_f = ampseq_dada2merge_process.sequences_barplot
+		File stacked_barplot_per_f = ampseq_dada2merge_process.stacked_barplot
+		File stacked_barplot_f = ampseq_dada2merge_process.stacked_barplot
 	}
 }
 
@@ -131,7 +135,11 @@ task ampseq_dada2merge_process {
 		File Match_report_per = "Report/Match_report_per.svg"
 		File barcodes_report_dada2 = "Report/barcodes_report_dada2.tsv"
 		File hamming_distances_forward = "Report/hamming_forward.tsv"
-		File hamming_distances_reverse = "Report/hamming_reverse.tsv"	
+		File hamming_distances_reverse = "Report/hamming_reverse.tsv"
+		File seqtab = "Results/DADA2_Contamination/filtered/seqtab.tsv"
+		File sequences_barplot = "Results/DADA2_Contamination/filtered/sequences_barplot.pdf"
+		File stacked_barplot_per = "Results/DADA2_Contamination/filtered/stacked_barplot_per.pdf"
+		File stacked_barplot = "Results/DADA2_Contamination/filtered/stacked_barplot.pdf"
 
 	}
 	runtime {
