@@ -137,9 +137,9 @@ task ampseq_dada2merge_process {
 		File hamming_distances_forward = "Report/hamming_forward.tsv"
 		File hamming_distances_reverse = "Report/hamming_reverse.tsv"
 		File seqtab = "Results/DADA2_Contamination/filtered/seqtab.tsv"
-		File sequences_barplot = "Results/DADA2_Contamination/filtered/sequences_barplot.pdf"
-		File stacked_barplot_per = "Results/DADA2_Contamination/filtered/stacked_barplot_per.pdf"
-		File stacked_barplot = "Results/DADA2_Contamination/filtered/stacked_barplot.pdf"
+		File sequences_barplot = "Results/DADA2_Contamination/sequences_barplot.svg"
+		File stacked_barplot_per = "Results/DADA2_Contamination/stacked_barplot_per.svg"
+		File stacked_barplot = "Results/DADA2_Contamination/stacked_barplot.svg"
 
 	}
 	runtime {
