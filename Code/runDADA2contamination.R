@@ -278,7 +278,7 @@ mergers <- mergePairs(dadaFs, derepFs, dadaRs, derepRs, verbose=TRUE, justConcat
 #             BARCODE REPORT           #
 ########################################
 
-source(paste0(file.path(dirname(dirname(work_dir)), "Code", "matching_functions.R")))
+source(file.path("/Code", "matching_functions.R"))
 barcodes = read.csv(file.path(dirname(dirname(work_dir)), "Data", 'barcodes_matches.csv'), sep = ",", header = TRUE)
 dist = 2
 
